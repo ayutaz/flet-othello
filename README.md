@@ -73,7 +73,7 @@ flet build linux
 
 mainブランチにpushすると、GitHub Actionsが自動的にビルドしてGitHub Pagesにデプロイします。
 
-デプロイ先URL: `https://ayutaz.github.io/flet-othello/`
+🔗 **デプロイ先URL**: https://ayutaz.github.io/flet-othello/
 
 ### ローカルサーバー
 
