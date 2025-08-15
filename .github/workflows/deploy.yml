@@ -43,7 +43,7 @@ jobs:
       run: |
         source .venv/bin/activate
         uv run flet build web \
-          --module-name src.main \
+          --module-name src/main.py \
           --project "Othello Game" \
           --description "A classic Othello game built with Flet" \
           --base-url "/flet-othello/"
