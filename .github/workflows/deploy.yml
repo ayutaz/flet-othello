@@ -37,11 +37,12 @@ jobs:
         uv venv
         source .venv/bin/activate
         uv pip install -r requirements.txt
+        uv pip install 'flet[all]==0.28.3'
     
     - name: Build Flet web app
       run: |
         source .venv/bin/activate
-        flet build web \
+        uv run flet build web \
           --project "Othello Game" \
           --description "A classic Othello game built with Flet" \
           --base-url "/flet-othello/"
