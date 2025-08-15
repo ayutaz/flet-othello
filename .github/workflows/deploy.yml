@@ -42,8 +42,8 @@ jobs:
     - name: Build Flet web app
       run: |
         source .venv/bin/activate
+        cd src
         uv run flet build web \
-          --module-name src/main.py \
           --project "Othello Game" \
           --description "A classic Othello game built with Flet" \
           --base-url "/flet-othello/"
@@ -54,7 +54,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: 'build/web'
+        path: 'src/build/web'
     
   deploy:
     environment:
