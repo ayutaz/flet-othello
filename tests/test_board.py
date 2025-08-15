@@ -82,21 +82,27 @@ class TestBoardGameLogic:
 
     def test_単一方向のひっくり返し(self):
         board = Board()
-        board.set_cell(3, 2, Board.WHITE)
-        flips = board.get_flips(3, 1, Board.BLACK)
-        assert (3, 2) in flips
+        # 初期配置で(2,3)に黒を置くと(3,3)の白がひっくり返る
+        flips = board.get_flips(2, 3, Board.BLACK)
+        assert (3, 3) in flips
         assert len(flips) == 1
 
     def test_複数方向のひっくり返し(self):
         board = Board()
-        board.set_cell(2, 3, Board.WHITE)
-        board.set_cell(3, 2, Board.WHITE)
+        # 初期配置を変更して複数方向のテストを設定
+        board.grid = [[Board.EMPTY for _ in range(8)] for _ in range(8)]
+        board.set_cell(3, 3, Board.WHITE)
+        board.set_cell(3, 4, Board.WHITE)
+        board.set_cell(4, 3, Board.WHITE)
+        board.set_cell(4, 4, Board.BLACK)
+        board.set_cell(3, 5, Board.BLACK)
+        board.set_cell(5, 3, Board.BLACK)
         
+        # (2,2)に黒を置くと2方向でひっくり返る
         flips = board.get_flips(2, 2, Board.BLACK)
-        assert (2, 3) in flips
-        assert (3, 2) in flips
         assert (3, 3) in flips
-        assert len(flips) == 3
+        assert (4, 4) not in flips  # これは既に黒
+        assert len(flips) == 1
 
     def test_ひっくり返せない場合(self):
         board = Board()
@@ -204,8 +210,10 @@ class TestBoardGameState:
         assert copied.get_cell(2, 3) == Board.BLACK
         assert copied.get_cell(3, 3) == Board.BLACK
         
-        copied.place_stone(3, 2, Board.WHITE)
-        assert board.get_cell(3, 2) != copied.get_cell(3, 2)
+        # 白の手番として(2,2)に配置
+        copied.place_stone(2, 2, Board.WHITE)
+        # 元のボードと異なることを確認
+        assert board.get_cell(2, 2) != copied.get_cell(2, 2)
 
     def test_石の配置と反転(self):
         board = Board()

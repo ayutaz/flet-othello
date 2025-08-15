@@ -162,7 +162,7 @@ class AI:
             return min_eval, best_move
 
     def evaluate_board(self, board: Board, player: int) -> float:
-        score = 0
+        score = 0.0
         opponent = board.get_opponent(player)
 
         for row in range(8):
@@ -177,7 +177,7 @@ class AI:
         opponent_mobility = len(board.get_valid_moves(opponent))
         score += (player_mobility - opponent_mobility) * self.mobility_weight
 
-        return score
+        return float(score)
 
     def get_position_value(self, row: int, col: int) -> int:
         position_values = [
