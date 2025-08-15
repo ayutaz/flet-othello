@@ -44,3 +44,4 @@ target-version = "py311"
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 addopts = "-v --cov=src --cov-report=term-missing"
+asyncio_mode = "auto"
